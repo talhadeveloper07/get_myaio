@@ -2,6 +2,7 @@
   
 namespace App\Http\Controllers;
 use Session;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Facades\PayPal; 
@@ -13,11 +14,23 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 use App\Traits\OrderTrait;
+use Redirect;
 use Mail;
    
 class PayPalController extends Controller
 {
     use OrderTrait;
+
+    public function generateRandomString($length = 8) {
+        $characters = 'OPNTPR5656';
+        $randomString = '';
+    
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+    
+        return $randomString;
+    }
 
     /**
      * Responds with a welcome message with instructions
@@ -26,21 +39,33 @@ class PayPalController extends Controller
      */
     public function payment()
     {
+        $business_info = BusinessInformation::where('client_id',Auth()->User()->id)
+        ->join('users','users.id','=','business_information.client_id')
+        ->join('products','products.id','=','business_information.pid')
+        ->get();
+
+        foreach($business_info as $business)
+                    {
+                        $price = $business->price; 
+
+                    }
         $data = [];
+        $p = $price;
+        $invoicestring = $this->generateRandomString(7);
         $data['items'] = [
             [
                 'name' => 'My AIO Portal',
-                'price' => 1,
-                'desc'  => 'Description for ItSolutionStuff.com',
+                'price' => $p,
+                'desc'  => 'Description for get.myaio.com',
                 'qty' => 1
             ]
         ];
-  
-        $data['invoice_id'] = 1;
+        
+        $data['invoice_id'] = $invoicestring;
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
         $data['cancel_url'] = route('payment.cancel');
-        $data['total'] = 1;
+        $data['total'] = $p;
   
         $provider = new ExpressCheckout;
   
@@ -70,6 +95,8 @@ class PayPalController extends Controller
     {
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
+        // $invoiceid = $provider->getExpressCheckoutDetails('invoice_id');
+        // dd($response['PAYMENTREQUEST_0_DESC']);
   
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
 
@@ -212,4 +239,7 @@ class PayPalController extends Controller
     {
         return view('paypal');
         }
+
+
+       
 }

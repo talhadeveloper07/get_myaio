@@ -82,6 +82,7 @@
             var inputField = document.getElementById("closure_id");
             if (show) {
                 inputField.style.display = "block";
+                $('#select-package-btn').hide();
             } else {
                 inputField.style.display = "none";
                 $('#select-package-btn').show();
@@ -103,6 +104,7 @@
       if(response == 'closer not found')
       {
         alert('not found');
+        $('#select-package-btn').hide();
       }else{
         $("#closure").attr('value',response);
         alert("closer found "+response);
