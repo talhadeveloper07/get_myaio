@@ -1,0 +1,214 @@
+.preloader 
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('/loading.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+.login-img-col {
+    background-image: url(/dashboard.PNG) !important;
+    background-size: 80%;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+.card{
+    width: 62%;
+    margin: 150px auto;
+}
+.login-row{
+     background-color: #F9FAFB !important;
+}
+.form-card, .form-col{
+    background-color: white !important;
+}
+.map-col #map {
+    height: 500px;
+    width: 80%;
+    border-radius: 10px;
+    margin: auto;
+}
+
+/* .form-col{
+    width: 70%;
+    margin: auto;
+} */
+.form-col input, .form-col textarea{
+    background-color: white !important;
+    padding: 12px 10px !important;
+}
+.form-col input:focus, .form-col textarea:focus{
+    border-color:#898989 !important;
+    box-shadow: none !important;
+}
+.main-sec{
+    height: 100% !important;
+}
+#remember{
+    padding: unset !important;
+}
+body{
+    background:white !important;
+}
+.add, .fa-minus {
+    cursor: pointer;
+}
+span.del-option, .add {
+    background: #ff4f4f;
+    color: white;
+    font-size: 10px;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+    height: auto;
+    line-height: 2em;
+    border-radius: 50px;
+}
+.add {
+    background: #157347;
+}
+.circle-form{
+    margin:150px auto !important;
+}
+.package-detail ul{
+    list-style-type: none;
+    padding: 0 !important;
+}
+.package-detail li{
+    margin-bottom: 5px;
+    text-align:center;
+}
+.package-box {
+    box-shadow: 0px 0px 20px 5px #d3d3d359;
+    border-radius: 10px;
+}
+.package-head.text-center {
+    padding: 20px;
+    background: #35b455;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.package-detail ul li {
+    font-size: 15px;
+    line-height: 2.5em;
+}
+.package-btn-box {
+    padding: 10px 0px 20px 0px;
+    border-top:1px solid lightgray;
+}
+.order-info-box, .order-detail-box {
+    box-shadow: 0px 0px 10px 0px lightgray;
+    border-radius: 10px;
+    padding: 30px;
+}
+.order-info-box td {
+    padding: 10px;
+}
+td.order-title {
+    font-size: 35px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.product-table span {
+    font-size: 12px;
+}
+.product-table td, .product-table th {
+    border: 1px solid lightgray;
+}
+.total {
+    font-size: 30px;
+    font-weight: 600;
+}
+.product-table td, .product-table th {
+    padding: 15px;
+}
+
+.panel-body {
+    border: 1px solid lightgray;
+    padding: 20px;
+    border-radius: 10px;
+}
+ul.business-info-list {
+    padding: 0;
+    list-style: none;
+}
+ul.business-info-list li {
+    line-height: 2.5em;
+    border-bottom: 1px solid #77889936;
+    padding: 10px 0px;
+}
+.business-order-box {
+    padding: 20px;
+}
+.status {
+    font-size: 13px !important;
+    padding: 9px 12px !important;
+    border-radius: 10px !important;
+}
+.invalid-feedback{
+    font-size: 9px !important;
+}
+.preloader 
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preloader img{
+    animation: rotation 2s infinite linear;
+    /* width:50px; */
+    /* height: 50px; */
+}
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+  main{
+    display: none;
+  }
+  .order-save-box {
+    background: #efefef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.order-save-box p{
+    margin: 0 !important;
+}
+.btn-thankyou {
+    padding: 15px 50px 15px 50px;
+    border-radius: 100px;
+    background: linear-gradient(267deg, #6721FF 27.93%, #00CBFF 99.79%, #C8BDFF -31.69%, #BAA6FF -22.78%);
+    transition: .3s !important;
+}
+
+#example_wrapper{
+    box-shadow: 0px 0px 20px 0px #d3d3d347;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+@media(max-width:767px){
+    .card{
+        width: 85%;
+        margin: 100px auto;
+    }
+    p,h1,h2,h3,h4,h5,h6,td,th{
+        font-size:12px;
+    }
+}
