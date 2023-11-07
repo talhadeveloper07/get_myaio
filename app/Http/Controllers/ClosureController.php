@@ -12,10 +12,11 @@ class ClosureController extends Controller
         if($request->ajax())
         {
         $output="true";
-        $closure = Closer::where('id','=',$request->search)->exists();
-        if($closure)
+        $closer = Closer::where('id','=',$request->search)->get();
+        if($closer->isNotEmpty())
         {
-        return Response('closer found');
+            foreach($closer as $close)
+        return Response($close->name);
         }else{
             return Response('closer not found');
         }

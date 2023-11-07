@@ -48,9 +48,8 @@ class BusinessInformationController extends Controller
             'description'=> $request->description,
             'radius_address'=> $request->radius_address,
             'radius' => $request->radius,
-            'closure_id' => $request->self_closure 
+            'closer_name' => $request->self_closure 
         ];
-
         BusinessInformation::create($data);
         return redirect('select-package')->with('message',"your business information is addedd successfully");
     }

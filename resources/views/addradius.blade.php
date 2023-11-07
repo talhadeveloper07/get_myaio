@@ -53,11 +53,11 @@
           <p>Are you processing the order yourself or one of our rep on the phone?</p>
             <input type="radio" id="self" name="self_closure" value="Self" onclick="toggleInputField(false)">
             <label for="self">Self</label><br>
-            <input type="radio" id="closure" name="self_closure" value="" onclick="toggleInputField(true)">
+            <input type="radio" id="closure" name="self_closure" onclick="toggleInputField(true)">
             <label for="closure">Closure</label><br>
 
           <div class='form-group my-3'>
-          <input class='form-control' id='closure_id' style='display:none;' placeholder='Enter Representative Employee ID' required>
+          <input class='form-control' id='closure_id' style='display:none;' name='closure_id' placeholder='Enter Representative Employee ID' re>
           </div>
           
         </div>
@@ -83,8 +83,8 @@
             if (show) {
                 inputField.style.display = "block";
             } else {
-              // $('#closure_id').removeAttr('name');
                 inputField.style.display = "none";
+                $('#select-package-btn').show();
             }
         }
 </script>
@@ -95,18 +95,20 @@
       if( this.value.length < 4 ) return;
       $('#select-package-btn').hide();
     $value=$(this).val();
-    $('#closure').val($value);
     $.ajax({
     type : 'get',
     url : '{{URL::to('check-closure')}}',
     data:{'search':$value},
     success:function(response){
-      if(response == 'closure found'){
-        $('#select-package-btn').show();
+      if(response == 'closer not found')
+      {
+        alert('not found');
       }else{
-        $('#select-package-btn').hide();        
+        $("#closure").attr('value',response);
+        alert("closer found "+response);
+        $('#select-package-btn').show();
       }
-      alert(response);
+      
     }
     });
     })
@@ -282,65 +284,46 @@ function initAutocomplete() {
 //         }
 
 function drawCircle() {
-  if (circle) {
-    circle.setMap(null);
-  }
-  const radiusInMiles = parseFloat(document.getElementById("radius").value);
-  const center = map.getCenter();
-  const radiusInMeters = radiusInMiles * 1609.34; // Convert miles to meters
-
-  circle = new google.maps.Circle({
-    map: map,
-    center: center,
-    radius: radiusInMeters,
-    draggable: true,
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
-  });
-
-  map.fitBounds(circle.getBounds());
-
-  // Function to fetch places within the circle
-  const fetchPlaces = (center, radiusInMeters, nextPageToken) => {
-    const request = {
-      location: center,
-      radius: radiusInMeters,
-      types: ["locality"], // Filter for cities
-    };
-
-    if (nextPageToken) {
-      request.pageToken = nextPageToken;
-    }
-
-    placesService.nearbySearch(request, (results, status, pagination) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        // Process the results (e.g., display them on the map or in a list)
-        console.log("Places within the circle:", results);
-
-        // Check if there are more results to fetch
-        if (pagination.hasNextPage) {
-          // Fetch the next page of results
-          pagination.nextPage();
+        if (circle) {
+          circle.setMap(null);
         }
+        const radiusInMiles = parseFloat(document.getElementById("radius").value);
+        const center = map.getCenter();
+        const radiusInMeters = radiusInMiles * 1609.34; // Convert miles to meters
+
+        circle = new google.maps.Circle({
+          map: map,
+          center: center,
+          radius: radiusInMeters,
+          draggable: true, // Make the circle draggable
+          strokeColor: "#FF0000",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#FF0000",
+          fillOpacity: 0.35,
+        });
+        map.fitBounds(circle.getBounds());
+
+        // Add a listener to update the circle's position when dragged
+        circle.addListener("dragend", function () {
+          map.fitBounds(circle.getBounds());
+
+          // Fetch places within the circle
+          const request = {
+            location: center,
+            radius: radiusInMeters,
+            types: ["locality"], // Filter for cities
+
+          };
+
+          placesService.nearbySearch(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              // Process the results (e.g., display them on the map or in a list)
+              console.log("Places within the circle:", results);
+            }
+          });
+        });
       }
-    });
-  };
-
-  // Start fetching places
-  fetchPlaces(center, radiusInMeters);
-  
-  // Add a listener to update the circle's position when dragged
-  circle.addListener("dragend", function () {
-    map.fitBounds(circle.getBounds());
-    
-    // Restart fetching places with the new circle position
-    fetchPlaces(circle.getCenter(), radiusInMeters);
-  });
-}
-
 
  
  

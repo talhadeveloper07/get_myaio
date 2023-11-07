@@ -19,5 +19,6 @@ class BusinessInformation extends Model
         'baddress',
         'radius_address',
         'radius',
+        'closer_name',
     ];
 }

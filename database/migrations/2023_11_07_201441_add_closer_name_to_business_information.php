@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('business_information', function (Blueprint $table) {
-            $table->foreignId('closerid')->nullable();
-            $table->foreign('closerid')->references('id')->on('closers')->onDelete('cascade');
+            $table->string('closer_name');
         });
     }
 
