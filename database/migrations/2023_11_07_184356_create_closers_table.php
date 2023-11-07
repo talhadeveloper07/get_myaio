@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('business_information', function (Blueprint $table) {
-            $table->foreignId('closure_id')->nullable();
-            $table->foreign('closure_id')->references('closure_id')->on('closures')->onDelete('cascade');
+        Schema::create('closers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('business_information', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('closers');
     }
 };

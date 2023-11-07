@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Closure extends Model
+class Closer extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'closure_id',
         'name',
     ];
 }

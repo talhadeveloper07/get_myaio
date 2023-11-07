@@ -53,11 +53,11 @@
           <p>Are you processing the order yourself or one of our rep on the phone?</p>
             <input type="radio" id="self" name="self_closure" value="Self" onclick="toggleInputField(false)">
             <label for="self">Self</label><br>
-            <input type="radio" id="closure" name="self_closure" value="closure" onclick="toggleInputField(true)">
+            <input type="radio" id="closure" name="self_closure" value="" onclick="toggleInputField(true)">
             <label for="closure">Closure</label><br>
 
           <div class='form-group my-3'>
-          <input class='form-control' id='closure_id' style='display:none;' name='closure_id' placeholder='Enter Representative Employee ID' re>
+          <input class='form-control' id='closure_id' style='display:none;' placeholder='Enter Representative Employee ID' required>
           </div>
           
         </div>
@@ -83,6 +83,7 @@
             if (show) {
                 inputField.style.display = "block";
             } else {
+              // $('#closure_id').removeAttr('name');
                 inputField.style.display = "none";
             }
         }
@@ -94,6 +95,7 @@
       if( this.value.length < 4 ) return;
       $('#select-package-btn').hide();
     $value=$(this).val();
+    $('#closure').val($value);
     $.ajax({
     type : 'get',
     url : '{{URL::to('check-closure')}}',

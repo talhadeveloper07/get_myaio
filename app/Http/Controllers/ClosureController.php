@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Closure;
+use App\Models\Closer;
 
 use Illuminate\Http\Request;
 
@@ -12,12 +12,12 @@ class ClosureController extends Controller
         if($request->ajax())
         {
         $output="true";
-        $closure = Closure::where('closure_id','=',$request->search)->exists();
+        $closure = Closer::where('id','=',$request->search)->exists();
         if($closure)
         {
-        return Response('closure found');
+        return Response('closer found');
         }else{
-            return Response('closure not found');
+            return Response('closer not found');
         }
         }
     }

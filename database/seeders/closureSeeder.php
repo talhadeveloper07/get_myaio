@@ -16,51 +16,51 @@ class closureSeeder extends Seeder
     {
         $data = [
             [
-                'closure_id' => '8847',
+                'id' => '8847',
                 'name' => 'Marc Walters',
                 // Add more columns and values as needed for the first record
             ],
             [
-                'closure_id' => '8849',
+                'id' => '8849',
                 'name' => 'Blake Wilson',
             ],
             [
-                'closure_id' => '8850',
+                'id' => '8850',
                 'name' => 'Aaron Wood',
             ],
             [
-                'closure_id' => '8851',
+                'id' => '8851',
                 'name' => 'Emilia Wilson',
             ],
             [
-                'closure_id' => '8852',
+                'id' => '8852',
                 'name' => 'Ross Miller',
             ],
             [
-                'closure_id' => '8853',
+                'id' => '8853',
                 'name' => 'Victor Hugo',
             ],
             [
-                'closure_id' => '8854',
+                'id' => '8854',
                 'name' => 'Rich Richardson',
             ],
             [
-                'closure_id' => '8855',
+                'id' => '8855',
                 'name' => 'Azymrh Jasper',
             ],
             [
-                'closure_id' => '8856',
+                'id' => '8856',
                 'name' => 'Michelle Jones',
             ],
             [
-                'closure_id' => '8857',
+                'id' => '8857',
                 'name' => 'Albert Hall',
             ],
             // Add more arrays for additional records
         ];
 
         foreach ($data as $record) {
-            \App\Models\Closure::create($record);
+            \App\Models\Closer::create($record);
         }
     }
 }

@@ -37,6 +37,7 @@ class BusinessInformationController extends Controller
 
     public function business_info_insert(Request $request)
     {
+        // dd($request->self_closure);
         $data = [  
             'client_id' => $request->client_id,    
             'bname'=> $request->bname,     
@@ -46,7 +47,8 @@ class BusinessInformationController extends Controller
             'baddress' => $request->baddress,
             'description'=> $request->description,
             'radius_address'=> $request->radius_address,
-            'radius' => $request->radius
+            'radius' => $request->radius,
+            'closure_id' => $request->self_closure 
         ];
 
         BusinessInformation::create($data);
